@@ -200,7 +200,67 @@ body {
   width: min(80vw, 560px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.wish-boat {
+  --boat-color: #e07a7a;
+  --rot: 0deg;
+  --float-delay: 0s;
+  --float-duration: 3.8s;
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: clamp(2rem, 4vw, 2.8rem);
+  height: clamp(2rem, 4vw, 2.8rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%) rotate(var(--rot));
+  cursor: pointer;
+  animation: boat-float var(--float-duration) ease-in-out var(--float-delay) infinite;
+}
+
+.wish-boat::before,
+.wish-boat::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wish-boat::before {
+  top: 0;
+  width: 65%;
+  height: 62%;
+  background: var(--boat-color);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  filter: saturate(1.15) brightness(1.06);
+}
+
+.wish-boat::after {
+  bottom: 0;
+  width: 100%;
+  height: 34%;
+  background: var(--boat-color);
+  filter: brightness(0.72) saturate(0.95);
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
+}
+
+.wish-boat:focus-visible {
+  outline: 2px solid rgba(255, 246, 192, 0.95);
+  outline-offset: 2px;
+}
+
+@keyframes boat-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--rot));
+  }
+
+  50% {
+    transform: translate(-50%, calc(-50% - 8px)) rotate(calc(var(--rot) + 2deg));
+  }
 }
 
 .wish-fab {
