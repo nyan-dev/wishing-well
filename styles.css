@@ -1,0 +1,79 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #2f4468 0%, #0d1424 60%);
+  color: #f4f6ff;
+}
+
+.app {
+  width: min(680px, 92vw);
+  padding: 1.5rem;
+  border: 1px solid #47618f;
+  border-radius: 14px;
+  background: rgba(17, 28, 49, 0.88);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+h1,
+h2 {
+  margin: 0 0 0.8rem;
+}
+
+.subtitle {
+  margin-top: 0;
+  opacity: 0.85;
+}
+
+.wish-form {
+  display: grid;
+  gap: 0.6rem;
+}
+
+input,
+button {
+  font: inherit;
+  border-radius: 8px;
+  border: 1px solid #5f7cae;
+  padding: 0.7rem 0.9rem;
+}
+
+input {
+  color: inherit;
+  background: #111a2d;
+}
+
+button {
+  cursor: pointer;
+  background: #dca940;
+  color: #1a1303;
+  border: 0;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(1.06);
+}
+
+.status {
+  min-height: 1.2rem;
+  margin: 0.8rem 0 1rem;
+  color: #f6d17f;
+}
+
+.wish-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.wish-list li {
+  line-height: 1.4;
+}
