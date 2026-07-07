@@ -1,0 +1,309 @@
+:root {
+  --bg-1: #0f0c29;
+  --bg-2: #302b63;
+  --bg-3: #24243e;
+  --text: #f9f6ef;
+  --stone-light: #9ca2b6;
+  --stone-mid: #72788f;
+  --stone-dark: #4a5068;
+  --scroll-progress: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 52%, var(--bg-3) 100%);
+  overflow-x: hidden;
+}
+
+.app {
+  position: relative;
+}
+
+.scroll-journey {
+  position: relative;
+  min-height: 100vh;
+}
+
+.scroll-frame {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll-space {
+  height: 420vh;
+}
+
+.top-ui {
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1rem 0;
+  pointer-events: none;
+}
+
+.top-ui h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  margin: 0.5rem 0 0;
+  opacity: 0.86;
+}
+
+.layer-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.well-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: translate3d(0, calc(64px - (var(--scroll-progress) * 12px)), 0) scale(1.06);
+  transition: opacity 220ms linear;
+}
+
+.layer-exterior {
+  opacity: calc(1 - min(1, var(--scroll-progress) * 1.55));
+}
+
+.layer-opening {
+  opacity: clamp(0, calc((var(--scroll-progress) - 0.12) * 3), 1);
+  transform: translate3d(0, calc(72px - (var(--scroll-progress) * 24px)), 0) scale(1.08);
+}
+
+.layer-shaft {
+  opacity: clamp(0, calc((var(--scroll-progress) - 0.34) * 3), 1);
+  transform: translate3d(0, calc(84px - (var(--scroll-progress) * 34px)), 0) scale(1.1);
+}
+
+.layer-water {
+  opacity: clamp(0, calc((var(--scroll-progress) - 0.62) * 3.2), 1);
+  transform: translate3d(0, calc(108px - (var(--scroll-progress) * 46px)), 0) scale(1.12);
+}
+
+.well-iso {
+  width: min(74vw, 540px);
+  aspect-ratio: 1 / 1;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(60deg) rotateZ(45deg);
+}
+
+.well-rim,
+.well-wall,
+.well-opening {
+  position: absolute;
+  inset: 0;
+  border-radius: 22%;
+}
+
+.well-rim {
+  background: linear-gradient(145deg, #b8bfd3, var(--stone-mid));
+  box-shadow: inset 0 0 0 14px rgba(34, 37, 49, 0.6), 0 34px 70px rgba(3, 3, 10, 0.6);
+}
+
+.well-opening {
+  inset: 20%;
+  background: radial-gradient(circle at 50% 45%, #151736 0%, #0b0c1c 65%, #04040a 100%);
+  box-shadow: inset 0 16px 30px rgba(255, 255, 255, 0.08), inset 0 -25px 48px rgba(0, 0, 0, 0.55);
+}
+
+.well-wall {
+  background: linear-gradient(145deg, var(--stone-light), var(--stone-dark));
+  opacity: 0.45;
+}
+
+.wall-front {
+  transform: translateY(9%) translateZ(-32px);
+}
+
+.wall-left {
+  transform: translateX(-8%) translateZ(-24px);
+}
+
+.wall-right {
+  transform: translateX(8%) translateZ(-24px);
+}
+
+.shaft-ring {
+  width: min(72vw, 500px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, rgba(177, 184, 206, 0.4) 0%, rgba(67, 73, 98, 0.76) 46%, rgba(18, 20, 33, 1) 100%);
+  box-shadow: inset 0 0 0 14px rgba(214, 220, 240, 0.12), 0 34px 70px rgba(0, 0, 0, 0.65);
+}
+
+.shaft-walls,
+.fx-water {
+  width: min(80vw, 560px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.shaft-walls {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(120, 129, 160, 0.12) 0,
+      rgba(120, 129, 160, 0.12) 12px,
+      rgba(56, 61, 82, 0.2) 12px,
+      rgba(56, 61, 82, 0.2) 24px
+    ),
+    radial-gradient(circle at 50% 38%, #2b2f46 0%, #161a2c 58%, #090d1c 100%);
+}
+
+.fx-canvas {
+  position: absolute;
+  width: min(80vw, 560px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+.fx-dust {
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+.fx-water {
+  background: radial-gradient(circle at 50% 45%, rgba(90, 139, 190, 0.7) 0%, rgba(22, 52, 93, 0.9) 58%, rgba(7, 15, 31, 0.98) 100%);
+  box-shadow: inset 0 16px 30px rgba(185, 225, 255, 0.15), 0 24px 56px rgba(0, 0, 0, 0.45);
+}
+
+.boat-overlay {
+  position: absolute;
+  width: min(80vw, 560px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.wish-fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.2rem;
+  color: #fff;
+  font-weight: 600;
+  background: linear-gradient(135deg, #c850c0, #4158d0);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 11, 20, 0.7);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  position: relative;
+  width: min(92vw, 540px);
+  padding: 1.2rem;
+  border-radius: 16px;
+  color: #191628;
+  background: linear-gradient(180deg, rgba(252, 247, 233, 0.97), rgba(245, 236, 215, 0.95));
+}
+
+.modal h2 {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.modal-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+  color: #312947;
+  background: rgba(91, 88, 130, 0.14);
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  min-height: 8rem;
+  resize: vertical;
+  border: 1px solid rgba(56, 40, 27, 0.18);
+  border-radius: 12px;
+  padding: 0.75rem;
+  font: inherit;
+  color: #2a1e20;
+  background:
+    linear-gradient(rgba(255, 248, 231, 0.92), rgba(255, 248, 231, 0.92)),
+    repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(77, 65, 55, 0.07) 24px, rgba(77, 65, 55, 0.07) 25px);
+}
+
+.form-row {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-primary {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, #ff7f50, #d16ba5);
+  cursor: pointer;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@media (max-width: 700px) {
+  .scroll-space {
+    height: 360vh;
+  }
+
+  .wish-fab {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}
