@@ -6,7 +6,6 @@
   --stone-light: #9ca2b6;
   --stone-mid: #72788f;
   --stone-dark: #4a5068;
-  --scroll-progress: 0;
 }
 
 * {
@@ -48,7 +47,7 @@ body {
 }
 
 .scroll-space {
-  height: 420vh;
+  height: 0;
 }
 
 .top-ui {
@@ -84,27 +83,12 @@ body {
   display: grid;
   place-items: center;
   opacity: 0;
-  transform: translate3d(0, calc(64px - (var(--scroll-progress) * 12px)), 0) scale(1.06);
-  transition: opacity 220ms linear;
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
 }
 
 .layer-exterior {
-  opacity: calc(1 - min(1, var(--scroll-progress) * 1.55));
-}
-
-.layer-opening {
-  opacity: clamp(0, calc((var(--scroll-progress) - 0.12) * 3), 1);
-  transform: translate3d(0, calc(72px - (var(--scroll-progress) * 24px)), 0) scale(1.08);
-}
-
-.layer-shaft {
-  opacity: clamp(0, calc((var(--scroll-progress) - 0.34) * 3), 1);
-  transform: translate3d(0, calc(84px - (var(--scroll-progress) * 34px)), 0) scale(1.1);
-}
-
-.layer-water {
-  opacity: clamp(0, calc((var(--scroll-progress) - 0.62) * 3.2), 1);
-  transform: translate3d(0, calc(108px - (var(--scroll-progress) * 46px)), 0) scale(1.12);
+  opacity: 1;
 }
 
 .well-iso {
@@ -180,6 +164,8 @@ body {
 
 .fx-canvas {
   position: absolute;
+  inset: 0;
+  margin: auto;
   width: min(80vw, 560px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
@@ -298,10 +284,6 @@ textarea {
 }
 
 @media (max-width: 700px) {
-  .scroll-space {
-    height: 360vh;
-  }
-
   .wish-fab {
     right: 0.75rem;
     bottom: 0.75rem;

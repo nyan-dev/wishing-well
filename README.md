@@ -6,7 +6,7 @@ A single-page interactive wishing well experience built with vanilla HTML, CSS, 
 
 - `/home/runner/work/wishing-well/wishing-well/index.html` — semantic app shell, layered well scene, canvas overlays, and modals
 - `/home/runner/work/wishing-well/wishing-well/css/well.css` — midnight theme, isometric well exterior, scroll journey layers, and modal UI
-- `/home/runner/work/wishing-well/wishing-well/js/scroll.js` — scroll-driven layer progress updates
+- `/home/runner/work/wishing-well/wishing-well/js/scroll.js` — GSAP ScrollTrigger-pinned 4-layer depth timeline
 - `/home/runner/work/wishing-well/wishing-well/js/canvas.js` — water shimmer and ambient dust canvas animation loops
 - `/home/runner/work/wishing-well/wishing-well/js/firebase.js` — Firestore initialization plus submit/fetch helpers
 - `/home/runner/work/wishing-well/wishing-well/js/app.js` — modal flow and wish form events
