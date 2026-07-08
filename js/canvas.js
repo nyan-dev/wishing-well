@@ -78,16 +78,21 @@ function frame(t) {
 [waterCanvas, dustCanvas].forEach(resizeCanvas);
 window.addEventListener('resize', () => [waterCanvas, dustCanvas].forEach(resizeCanvas));
 
+const canvasVisibility = {};
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (entry.target === waterCanvas) {
-      state.running = entry.isIntersecting;
-      if (state.running) requestAnimationFrame(frame);
-    }
+    canvasVisibility[entry.target.id] = entry.isIntersecting;
   });
+  state.running = Object.values(canvasVisibility).some(Boolean);
+  if (state.running) requestAnimationFrame(frame);
 }, { threshold: 0.05 });
 
-if (waterCanvas) {
-  observer.observe(waterCanvas);
-  requestAnimationFrame(frame);
-}
+[waterCanvas, dustCanvas].forEach((canvas) => {
+  if (canvas) {
+    observer.observe(canvas);
+    canvasVisibility[canvas.id] = false;
+  }
+});
+
+requestAnimationFrame(frame);

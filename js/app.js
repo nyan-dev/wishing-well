@@ -11,12 +11,12 @@ const palette = ['#e07a7a', '#e8c46a', '#6dcde0', '#8be3c6', '#b39cff'];
 
 function openModal(el) {
   if (!el) return;
-  el.hidden = false;
+  el.classList.add('backdrop-visible');
 }
 
 function closeModal(el) {
   if (!el) return;
-  el.hidden = true;
+  el.classList.remove('backdrop-visible');
 }
 
 function updateWishCount() {
