@@ -16,14 +16,75 @@ function addLocalWish({ text, color, createdAt }) {
   localWishStore.push({ text, color, createdAt });
 }
 
+function triggerTossAnimation() {
+  const coin = document.getElementById('tossCoin');
+  const ripple = document.getElementById('tossRipple');
+  if (!coin || !ripple) return;
+
+  coin.style.left = '50%';
+  coin.style.top = '30%';
+  ripple.style.left = '50%';
+  ripple.style.top = '65%';
+
+  coin.classList.remove('active');
+  ripple.classList.remove('active');
+  void coin.offsetWidth;
+
+  coin.classList.add('active');
+  setTimeout(() => ripple.classList.add('active'), 500);
+
+  setTimeout(() => {
+    coin.classList.remove('active');
+    ripple.classList.remove('active');
+  }, 1200);
+}
+
+function showToast() {
+  const toast = document.getElementById('wishToast');
+  if (!toast) return;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+let lastFocusedElement = null;
+
 function openModal(el) {
   if (!el) return;
+  lastFocusedElement = document.activeElement;
   el.classList.add('backdrop-visible');
+  const firstFocusable = el.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (firstFocusable) firstFocusable.focus();
 }
 
 function closeModal(el) {
   if (!el) return;
   el.classList.remove('backdrop-visible');
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+    lastFocusedElement = null;
+  }
+}
+
+function handleModalKeydown(event) {
+  if (event.key === 'Escape') {
+    closeModal(wishModal);
+    closeModal(discoverModal);
+    return;
+  }
+  if (event.key !== 'Tab') return;
+  const modal = document.querySelector('.backdrop-visible .modal');
+  if (!modal) return;
+  const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (focusables.length === 0) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
 }
 
 function updateWishCount() {
@@ -57,8 +118,12 @@ wishForm?.addEventListener('submit', async (event) => {
     window.wishingWellScene.addBoat(color);
   }
 
+  triggerTossAnimation();
+  showToast();
+
   wishForm.reset();
-  updateWishCount();
+updateWishCount();
+document.addEventListener('keydown', handleModalKeydown);
   closeModal(wishModal);
 });
 

@@ -260,6 +260,10 @@ const canvasVisibility = {};
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     canvasVisibility[entry.target.id] = entry.isIntersecting;
+    if (entry.isIntersecting) {
+      resizeCanvas(entry.target);
+      if (entry.target.id === 'waterCanvas') initBoats(waterCanvas);
+    }
   });
   state.running = Object.values(canvasVisibility).some(Boolean);
   if (state.running) requestAnimationFrame(frame);
