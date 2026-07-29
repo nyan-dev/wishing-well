@@ -1,3 +1,8 @@
+/* ===================================================================
+   WISHING WELL — Modal flow, wish form, boat-click discovery
+   Follows DESIGN.md: RPG dialog box interaction, stepped motion.
+   =================================================================== */
+
 const wishModal = document.getElementById('wishModal');
 const discoverModal = document.getElementById('discoverModal');
 const openWishModalBtn = document.getElementById('openWishModal');
@@ -7,7 +12,7 @@ const wishForm = document.getElementById('wishForm');
 const wishText = document.getElementById('wishText');
 const wishCount = document.getElementById('wishCount');
 
-const palette = ['#e07a7a', '#e8c46a', '#6dcde0', '#8be3c6', '#b39cff'];
+const palette = ['#e8b33d', '#ffe27a', '#6fd6d6', '#a3d66b', '#9b8fb8'];
 window.wishingWellPalette = palette;
 
 const localWishStore = [];
@@ -51,6 +56,7 @@ let lastFocusedElement = null;
 function openModal(el) {
   if (!el) return;
   lastFocusedElement = document.activeElement;
+  el.removeAttribute('hidden');
   el.classList.add('backdrop-visible');
   const firstFocusable = el.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   if (firstFocusable) firstFocusable.focus();
@@ -59,6 +65,7 @@ function openModal(el) {
 function closeModal(el) {
   if (!el) return;
   el.classList.remove('backdrop-visible');
+  el.setAttribute('hidden', '');
   if (lastFocusedElement) {
     lastFocusedElement.focus();
     lastFocusedElement = null;
@@ -97,6 +104,8 @@ closeWishModalBtn?.addEventListener('click', () => closeModal(wishModal));
 closeDiscoverModalBtn?.addEventListener('click', () => closeModal(discoverModal));
 wishText?.addEventListener('input', updateWishCount);
 
+document.addEventListener('keydown', handleModalKeydown);
+
 wishForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const text = wishText?.value.trim();
@@ -122,8 +131,7 @@ wishForm?.addEventListener('submit', async (event) => {
   showToast();
 
   wishForm.reset();
-updateWishCount();
-document.addEventListener('keydown', handleModalKeydown);
+  updateWishCount();
   closeModal(wishModal);
 });
 
