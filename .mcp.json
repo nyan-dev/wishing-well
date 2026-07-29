@@ -15,18 +15,12 @@
         "@modelcontextprotocol/server-fetch"
       ]
     },
-    "playwright": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@playwright/mcp@latest"
-      ]
-    },
     "chrome-devtools": {
       "command": "npx",
       "args": [
         "-y",
-        "chrome-devtools-mcp@latest"
+        "chrome-devtools-mcp@latest",
+        "--autoConnect"
       ]
     }
   }
