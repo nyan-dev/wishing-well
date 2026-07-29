@@ -1,0 +1,13 @@
+{
+    "hooks": {
+        "PostToolUse": [
+            {
+                "matcher": {
+                    "tool": "Edit",
+                    "filePattern": "*.css"
+                },
+                "command": "bash .claude/hooks/check-design-system.sh \"$CLAUDE_FILE_PATH\""
+            }
+        ]
+    }
+}
