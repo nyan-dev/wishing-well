@@ -31,3 +31,9 @@ The wishing well is a single-page vanilla HTML/CSS/JS app. It uses:
 - Propose concrete CSS/JS fixes (small, high-impact first)
 - Always verify the fix doesn't break existing canvas or scroll behavior
 - Commit changes as small, focused commits
+
+- **Pixel art system compliance**: verify color ramps (not gradients), pixel
+  fonts, integer sprite scaling, stepped animation, and hard-offset shadows
+  match DESIGN.md. Use the playwright MCP to screenshot the well at desktop
+  and mobile widths and visually confirm the cutaway view (rim + shaft +
+  water all visible) before marking any polish task complete.

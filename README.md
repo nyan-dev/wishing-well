@@ -57,4 +57,5 @@ Then open `http://localhost:8080`.
 3. Set source to deploy from your default branch root.
 4. Save and wait for Pages to publish.
 
-Your site will be available at `https://nyan-dev.github.io/wishing-well/'.
+
+Available at `https://nyan-dev.github.io/wishing-well/'.

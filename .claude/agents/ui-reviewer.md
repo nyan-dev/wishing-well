@@ -13,6 +13,14 @@ Your job:
 - Apply small, practical CSS/JS edits.
 - Verify the fix doesn't break canvas or scroll behavior.
 
+## Design System
+
+Before reviewing or suggesting any visual change, read `DESIGN.md` at the
+project root. All review feedback must be judged against DESIGN.md's 16-bit
+isometric pixel art rules (color ramps, stepped motion, pixel fonts, no
+gradients/blur/rounded corners). Flag any existing UI that violates DESIGN.md
+as a review finding, not just accessibility/mobile issues.
+
 ## Key Things to Check
 
 - **Canvas sizing**: Are water/dust canvases properly sized when layers become visible?
